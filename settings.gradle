@@ -1,0 +1,5 @@
+include ':NavMenuLayout-Library'
+include ':svprogresshud'
+include ':utils'
+include ':app'
+rootProject.name = "myUtils"

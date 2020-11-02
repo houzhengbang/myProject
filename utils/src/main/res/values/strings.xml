@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="text_camera_permission_rationale">您必须授权开启摄像头和访问存储空间权限，才能进行下一步操作</string>
+    <string name="text_external_permission_rationale">您必须授权开启访问存储空间权限，才能进行下一步操作</string>
+
+</resources>
