@@ -1,4 +1,4 @@
-package com.hzb.utils.util.permission;
+package com.hzb.utils.utilTool.permission;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.hzb.utils.R;
-import com.hzb.utils.util.BaseTypeUtils;
+import com.hzb.utils.utilTool.BaseTypeUtils;
 
 import java.util.Arrays;
 

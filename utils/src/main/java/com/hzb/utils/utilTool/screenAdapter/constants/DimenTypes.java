@@ -1,4 +1,4 @@
-package com.hzb.utils.util.screenAdapter.constants;
+package com.hzb.utils.utilTool.screenAdapter.constants;
 
 /**
  * @description

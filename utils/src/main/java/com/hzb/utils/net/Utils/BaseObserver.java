@@ -1,10 +1,5 @@
 package com.hzb.utils.net.Utils;
 
-import android.util.Log;
-import android.widget.Toast;
-
-import com.hzb.utils.util.LogUtil;
-
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 

@@ -1,8 +1,8 @@
-package com.hzb.utils.util.screenAdapter.generator;
+package com.hzb.utils.utilTool.screenAdapter.generator;
 
 
-import com.hzb.utils.util.screenAdapter.constants.DimenTypes;
-import com.hzb.utils.util.screenAdapter.utils.MakeUtils;
+import com.hzb.utils.utilTool.screenAdapter.constants.DimenTypes;
+import com.hzb.utils.utilTool.screenAdapter.utils.MakeUtils;
 
 import java.io.File;
 

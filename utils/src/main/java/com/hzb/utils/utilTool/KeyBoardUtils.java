@@ -1,4 +1,4 @@
-package com.hzb.utils.util;
+package com.hzb.utils.utilTool;
 
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;

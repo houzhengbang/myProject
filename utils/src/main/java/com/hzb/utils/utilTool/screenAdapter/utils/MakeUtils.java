@@ -1,6 +1,6 @@
-package com.hzb.utils.util.screenAdapter.utils;
+package com.hzb.utils.utilTool.screenAdapter.utils;
 
-import com.hzb.utils.util.screenAdapter.constants.DimenTypes;
+import com.hzb.utils.utilTool.screenAdapter.constants.DimenTypes;
 
 import java.io.File;
 import java.io.FileNotFoundException;

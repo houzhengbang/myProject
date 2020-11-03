@@ -14,11 +14,8 @@ import androidx.viewpager.widget.ViewPager;
 
 
 import com.hzb.test.R;
-import com.hzb.test.ui.activity.MainActivity;
 import com.hzb.test.ui.activity.login.LoginActivity;
 import com.hzb.utils.base.Base2Activity;
-import com.hzb.utils.util.AppUtils;
-import com.hzb.utils.util.SharedPreferenceUtils;
 
 import java.util.ArrayList;
 import java.util.List;

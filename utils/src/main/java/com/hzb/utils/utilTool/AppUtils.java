@@ -1,4 +1,4 @@
-package com.hzb.utils.util;
+package com.hzb.utils.utilTool;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;

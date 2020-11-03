@@ -1,4 +1,4 @@
-package com.hzb.utils.util;
+package com.hzb.utils.utilTool;
 
 import android.app.Activity;
 import android.content.Context;

@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,11 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bigkoo.svprogresshud.SVProgressHUD;
-import com.bigkoo.svprogresshud.listener.OnDismissListener;
 import com.hzb.utils.R;
-import com.hzb.utils.util.StatusBarUtil;
-import com.hzb.utils.util.permission.PermissionUtils;
+import com.hzb.utils.utilTool.StatusBarUtil;
+import com.hzb.utils.utilTool.permission.PermissionUtils;
 
 /**
  * activity基类

@@ -1,4 +1,4 @@
-package com.hzb.utils.util.activityManager;
+package com.hzb.utils.utilTool.activityManager;
 
 /**
  * FileName: AppManager

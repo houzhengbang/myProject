@@ -1,7 +1,6 @@
 package com.hzb.test.ui.activity.home;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -15,7 +14,7 @@ import com.hzb.test.R;
 import com.hzb.test.ui.fragment.MainFragment;
 import com.hzb.test.ui.fragment.MyFragment;
 import com.hzb.utils.base.Base2Activity;
-import com.hzb.utils.util.T;
+import com.hzb.utils.utilTool.T;
 
 public class HomeActivity extends Base2Activity {
 

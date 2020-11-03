@@ -1,4 +1,4 @@
-package com.hzb.utils.util;
+package com.hzb.utils.utilTool;
 
 import com.hzb.utils.BuildConfig;
 import com.orhanobut.logger.Logger;

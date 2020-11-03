@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import com.hzb.test.R;
 import com.hzb.test.ui.activity.MainActivity;
 import com.hzb.utils.base.Base2Activity;
-import com.hzb.utils.util.SharedPreferenceUtils;
+import com.hzb.utils.utilTool.SharedPreferenceUtils;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.hzb.utils.util;
+package com.hzb.utils.utilTool;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

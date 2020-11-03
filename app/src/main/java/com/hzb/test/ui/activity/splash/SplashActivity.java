@@ -10,12 +10,11 @@ import android.view.WindowManager;
 
 import com.hzb.test.ui.activity.MainActivity;
 import com.hzb.test.ui.activity.guide.GuideActivity;
-import com.hzb.test.ui.activity.home.HomeActivity;
 import com.hzb.test.ui.activity.login.LoginActivity;
 import com.hzb.utils.base.Base2Activity;
-import com.hzb.utils.util.AppUtils;
-import com.hzb.utils.util.SharedPreferenceUtils;
-import com.hzb.utils.util.StatusBarUtil;
+import com.hzb.utils.utilTool.AppUtils;
+import com.hzb.utils.utilTool.SharedPreferenceUtils;
+import com.hzb.utils.utilTool.StatusBarUtil;
 
 
 /**
@@ -109,7 +108,7 @@ public class SplashActivity extends Base2Activity implements SplashControl.ISpla
         if (1 == type) {
             intent.setClass(this, LoginActivity.class);
         } else if (2 == type) {
-            intent.setClass(this, HomeActivity.class);
+            intent.setClass(this, MainActivity.class);
         } else if (3 == type) {
             intent.setClass(this, GuideActivity.class);
         }

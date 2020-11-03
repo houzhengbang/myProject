@@ -1,24 +1,23 @@
 package com.hzb.test.ui.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.hzb.test.R;
-import com.hzb.test.app.MyApplication;
-import com.hzb.test.entity.LoginBean;
-import com.hzb.test.entity.LoginBody;
-import com.hzb.test.net.RequestApiUtils;
 import com.hzb.test.ui.fragment.MainFragment;
+import com.hzb.test.update.AppDownloadUtils;
 import com.hzb.utils.base.Base2Activity;
-import com.hzb.utils.net.Utils.MyObserver;
-import com.hzb.utils.util.LogUtil;
-import com.orhanobut.logger.Logger;
 
 public class MainActivity extends Base2Activity {
 
@@ -102,31 +101,65 @@ public class MainActivity extends Base2Activity {
     }
 
 
-    private void getDatas() {
-
-        LoginBody body = new LoginBody("18434395102", "111", "");
-        RequestApiUtils.getData(this, MyApplication.getRetrofitUtils().sendss(body), new MyObserver<LoginBean>(this) {
-
-            @Override
-            public void onSuccess(LoginBean result) {
-//                Log.e("MainActivity", "onSuccess: " + result);
-            }
-
-            @Override
-            public void onFailure(Throwable e, String errorMsg) {
-//                Log.e("MainActivity", "onFailure: " + errorMsg);
-
-            }
-        });
-    }
+//    private void getDatas() {
+//
+//        LoginBody body = new LoginBody("18434395102", "111", "");
+//        RequestApiUtils.getData(this, MyApplication.getRetrofitUtils().sendss(body), new MyObserver<LoginBean>(this) {
+//
+//            @Override
+//            public void onSuccess(LoginBean result) {
+////                Log.e("MainActivity", "onSuccess: " + result);
+//            }
+//
+//            @Override
+//            public void onFailure(Throwable e, String errorMsg) {
+////                Log.e("MainActivity", "onFailure: " + errorMsg);
+//
+//            }
+//        });
+//    }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
 
+    private String url = "http://apk-cdn.zhangxinhulian.com/com.zxhl.weather-guanwang-1.0.6_106_jiagu.apk";
+
     public void xx(View view) {
 
-        getDatas();
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            //申请WRITE_EXTERNAL_STORAGE权限
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    2);
+        } else {
+            AppDownloadUtils.getInstance(this).setDownUrl(url).start();
+        }
+    }
+
+
+    public void stop(View view) {
+        AppDownloadUtils.getInstance(this).stop();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // 8.0以上版本安装apk 获取未知来源为true才会继续下载安装
+        if (requestCode == AppDownloadUtils.REQUEST_CODE_APP_INSTALL) {
+//            if (StringUtils.isEmpty(url)) return;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if (AppDownloadUtils.isHasInstallPermissionWithO(this)) {
+                    if (AppDownloadUtils.getInstance(this).getmFile() != null) {
+                        AppDownloadUtils.getInstance(this).installApk(this,
+                                AppDownloadUtils.getInstance(this).getmFile(),
+                                AppDownloadUtils.getInstance(this).getFilePath());
+                    } else {
+                        AppDownloadUtils.getInstance(this).setDownUrl(url).start();
+                    }
+                }
+            }
+        }
     }
 }

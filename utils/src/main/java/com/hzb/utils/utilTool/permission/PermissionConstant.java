@@ -1,4 +1,4 @@
-package com.hzb.utils.util.permission;
+package com.hzb.utils.utilTool.permission;
 
 import android.Manifest;
 
