@@ -2,16 +2,17 @@ package com.hzb.myUniversalUtils.net.Utils;
 
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.franmontiel.persistentcookiejar.PersistentCookieJar;
-import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
-import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.hzb.myUniversalUtils.BuildConfig;
 import com.hzb.myUniversalUtils.baseApplication.BaseApplication;
-import com.hzb.myUniversalUtils.net.Constans;
+import com.hzb.myUniversalUtils.net.ServerIP;
+import com.hzb.myUniversalUtils.net.HttpConstans;
+import com.hzb.myUniversalUtils.net.Utils.persistentcookiejar.ClearableCookieJar;
+import com.hzb.myUniversalUtils.net.Utils.persistentcookiejar.PersistentCookieJar;
+import com.hzb.myUniversalUtils.net.Utils.persistentcookiejar.cache.SetCookieCache;
+import com.hzb.myUniversalUtils.net.Utils.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.hzb.myUniversalUtils.utilTool.LogUtil;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -92,12 +93,14 @@ public class RetrofitUtils<T> {
     private Retrofit initRetrofit(OkHttpClient client) {
         return new Retrofit.Builder()
                 .client(client)
-                .baseUrl(Constans.BaseUrl)
+                .baseUrl(ServerIP.BaseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
+
+    private static ClearableCookieJar cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(BaseApplication.getInstance()));
 
     /**
      * 初始化okhttp
@@ -107,28 +110,16 @@ public class RetrofitUtils<T> {
     @NonNull
     private OkHttpClient.Builder initOkHttp() {
         OkHttpClient.Builder builds = new OkHttpClient.Builder();
-
-//        OkHttpClient builds = new OkHttpClient();
-//        builds.newBuilder();
-//        builds.build();
-        builds.readTimeout(Constans.DEFAULT_TIME, TimeUnit.SECONDS);//设置读取超时时间
-        builds.connectTimeout(Constans.DEFAULT_TIME, TimeUnit.SECONDS);//设置请求超时时间
-        builds.writeTimeout(Constans.DEFAULT_TIME, TimeUnit.SECONDS);//设置写入超时时间
+        builds.readTimeout(HttpConstans.READ_DEFAULT_TIME, TimeUnit.SECONDS);//设置读取超时时间
+        builds.connectTimeout(HttpConstans.REQUEST_DEFAULT_TIME, TimeUnit.SECONDS);//设置请求超时时间
+        builds.writeTimeout(HttpConstans.WRITE_DEFAULT_TIME, TimeUnit.SECONDS);//设置写入超时时间
         builds.retryOnConnectionFailure(true);//设置出现错误进行重新连接。
+        builds.cookieJar(cookieJar);  //cookie 令牌
 
 
         if (BuildConfig.DEBUG) {
             builds.addInterceptor(genericClient());//添加打印拦截器
         }
-
-
-        //cookie
-//        builds.addInterceptor(new AddCookiesInterceptor());
-//        builds.addInterceptor(new ReceivedCookiesInterceptor());
-
-        //cookie
-        builds.cookieJar(new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(BaseApplication.getInstance())));
-
 
         return builds;
     }
@@ -141,13 +132,11 @@ public class RetrofitUtils<T> {
                 if (TextUtils.isEmpty(message)) {
                     return;
                 }
-//                Log.i("HttpLoggingInterceptor", "log: " + message);
                 //打印json数据
                 LogUtil.i("HttpLoggingInterceptor","log: " +message);
             }
         });
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
 
         return interceptor;
     }

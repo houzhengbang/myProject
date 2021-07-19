@@ -8,8 +8,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
 
-import com.bigkoo.svprogresshud.SVProgressHUD;
-import com.bigkoo.svprogresshud.listener.OnDismissListener;
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.hzb.myUniversalUtils.aRouterPath.PathManagement;
+import com.hzb.myUniversalUtils.utilTool.activityManager.AppManager;
 
 import io.reactivex.disposables.Disposable;
 
@@ -24,25 +25,11 @@ public abstract class MyObserver<T> extends BaseObserver<T> {
     private ProgressDialog dialog;
     private Context mContext;
     private Disposable d;
-    private SVProgressHUD svProgressHUD;
 
-
-    private boolean isShowSVProgressHUD = true;
 
     public MyObserver(Context context, Boolean showDialog) {
         mContext = context;
         mShowDialog = showDialog;
-    }
-
-    public MyObserver(Context context, Boolean showDialog, int type) {
-        mContext = context;
-        mShowDialog = showDialog;
-
-        if (type == 0) {
-            isShowSVProgressHUD = true;
-        } else {
-            isShowSVProgressHUD = false;
-        }
     }
 
     public MyObserver(Context context) {
@@ -58,22 +45,6 @@ public abstract class MyObserver<T> extends BaseObserver<T> {
                 d.dispose();
             }
         } else {
-
-            if (isShowSVProgressHUD) {
-                if (svProgressHUD == null && mShowDialog == true) {
-                    svProgressHUD = new SVProgressHUD(mContext);
-                    svProgressHUD.setOnDismissListener(new OnDismissListener() {
-                        @Override
-                        public void onDismiss(SVProgressHUD hud) {
-                            // 对话框取消 直接停止执行请求
-                            if (!d.isDisposed()) {
-                                d.dispose();
-                            }
-                        }
-                    });
-                    svProgressHUD.showWithStatus("加载中", SVProgressHUD.SVProgressHUDMaskType.ClearCancel);
-                }
-            } else {
 
                 if (dialog == null && mShowDialog == true) {
                     dialog = new ProgressDialog(mContext);
@@ -92,47 +63,44 @@ public abstract class MyObserver<T> extends BaseObserver<T> {
                     dialog.show();
                 }
             }
-        }
     }
 
     @Override
     public void onError(Throwable e) {
-        if (d.isDisposed()) {
-            d.dispose();
-        }
-        hidDialog();
+        cancleRequest();
         super.onError(e);
     }
 
     @Override
     public void onComplete() {
-        if (d.isDisposed()) {
-            d.dispose();
-        }
-        hidDialog();
+        cancleRequest();
         super.onComplete();
     }
 
+    @Override
+    public void onNext(T t) {
+        super.onNext(t);
+        //加判空，防止网络请求返回空的情况
+        if (t != null && t instanceof BaseResponse) {
+            BaseResponse baseBean = (BaseResponse) t;
+            if (baseBean.getErrorCode().equals("5026")) {
+                onSignOut();
+            }
+        }
+    }
 
     public void hidDialog() {
 
-        if (isShowSVProgressHUD) {
-            if (svProgressHUD != null && mShowDialog == true)
-                svProgressHUD.dismiss();
-            svProgressHUD = null;
-        } else {
+
             if (dialog != null && mShowDialog == true)
                 dialog.dismiss();
             dialog = null;
-        }
+
 
     }
 
     /**
      * 是否有网络连接，不管是wifi还是数据流量
-     *
-     * @param context
-     * @return
      */
     public static boolean isConnected(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -150,8 +118,18 @@ public abstract class MyObserver<T> extends BaseObserver<T> {
     public void cancleRequest() {
         if (d != null && d.isDisposed()) {
             d.dispose();
-            hidDialog();
+
         }
+        hidDialog();
+    }
+    /**
+     * 被踢下线处理
+     */
+    public void onSignOut() {
+        AppManager.getInstance().finishAllActivity();// 销毁Activity
+
+        //@Route(path = PathManagement.ACTIVITY_URL_LOGIN )
+        ARouter.getInstance().build(PathManagement.ACTIVITY_URL_LOGIN).navigation();
     }
 }
 

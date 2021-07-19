@@ -19,6 +19,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
         //加判空，防止网络请求返回空的情况
         if (t != null && t instanceof BaseResponse) {
+            //        //在这边对 基础数据 进行统一处理  举个例子：
             BaseResponse baseBean = (BaseResponse) t;
             if (baseBean.getResult().equals(FAIL)) {
                 onFailure(null, baseBean.getErrorMsg());
@@ -27,14 +28,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
                 onSuccess(t);
             }
         }
-//
-//        //在这边对 基础数据 进行统一处理  举个例子：
-//        if(response.result.equals("success")){
-//            onSuccess(response.data());
-//        }else{
-//            onFailure(null,response.errorMsg());
-//        }
-    }
+}
 
     @Override
     public void onError(Throwable e) {//服务器错误信息处理

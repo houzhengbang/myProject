@@ -3,7 +3,9 @@ package com.hzb.myUniversalUtils.baseApplication;
 import android.app.Application;
 
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.orhanobut.logger.AndroidLogAdapter;
+import com.orhanobut.logger.BuildConfig;
 import com.orhanobut.logger.FormatStrategy;
 import com.orhanobut.logger.Logger;
 import com.orhanobut.logger.PrettyFormatStrategy;
@@ -30,8 +32,23 @@ public class BaseApplication extends Application {
                 .build();
 
         Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy));
+
+
+        //路由 初始化
+        if(BuildConfig.DEBUG){
+            ARouter.openLog(); // 打印日志
+            ARouter.openDebug(); // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险
+        }
+        ARouter.init(this); // 尽可能早，推荐在Application中初始化
+
     }
 
+    @Override
+    public void onTerminate() {
+        super.onTerminate();
+        //路由  销毁
+        ARouter.getInstance().destroy();
+    }
 
     public synchronized static BaseApplication getInstance() {
         return sInstance;
