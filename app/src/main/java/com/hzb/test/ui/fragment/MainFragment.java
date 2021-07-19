@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.hzb.test.R;
-import com.hzb.utils.base.BaseFragment;
+import com.hzb.myUniversalUtils.base.BaseFragment;
 
 
 

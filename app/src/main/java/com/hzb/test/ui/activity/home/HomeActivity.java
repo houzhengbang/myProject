@@ -13,10 +13,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.hzb.test.R;
 import com.hzb.test.ui.fragment.MainFragment;
 import com.hzb.test.ui.fragment.MyFragment;
-import com.hzb.utils.base.Base2Activity;
-import com.hzb.utils.utilTool.T;
+import com.hzb.myUniversalUtils.base.BaseActivity;
+import com.hzb.myUniversalUtils.utilTool.T;
 
-public class HomeActivity extends Base2Activity {
+public class HomeActivity extends BaseActivity {
 
 
     private BottomNavigationView bottomNavigationView;

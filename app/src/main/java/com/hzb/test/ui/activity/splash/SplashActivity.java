@@ -2,19 +2,14 @@ package com.hzb.test.ui.activity.splash;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.hzb.test.ui.activity.MainActivity;
 import com.hzb.test.ui.activity.guide.GuideActivity;
 import com.hzb.test.ui.activity.login.LoginActivity;
-import com.hzb.utils.base.Base2Activity;
-import com.hzb.utils.utilTool.AppUtils;
-import com.hzb.utils.utilTool.SharedPreferenceUtils;
-import com.hzb.utils.utilTool.StatusBarUtil;
+import com.hzb.myUniversalUtils.base.BaseActivity;
+import com.hzb.myUniversalUtils.utilTool.AppUtils;
+import com.hzb.myUniversalUtils.utilTool.SharedPreferenceUtils;
 
 
 /**
@@ -23,7 +18,7 @@ import com.hzb.utils.utilTool.StatusBarUtil;
  * @desc :欢迎页
  */
 
-public class SplashActivity extends Base2Activity implements SplashControl.ISplashView {
+public class SplashActivity extends BaseActivity implements SplashControl.ISplashView {
 
     private SplashPresenter splashPresenter;
 
@@ -33,21 +28,16 @@ public class SplashActivity extends Base2Activity implements SplashControl.ISpla
         super.onCreate(savedInstanceState);
 
 
-//        //系统UI标志隐藏导航 状态栏
-        Window _window = getWindow();
-        WindowManager.LayoutParams params = _window.getAttributes();
-        params.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE;
-        _window.setAttributes(params);
+        //系统UI标志隐藏导航 状态栏
+        hideNavigationBar();
 
-
-        //全屏
-//        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN); //隐藏状态栏
-        StatusBarUtil.setColorDiff(this, Color.parseColor("#00000000"));  // 设置状态栏透明
+        // 设置状态栏透明
+        setStatusBarColor("#00000000");
 //        StatusBarUtil.setLightMode(this);
 //        StatusBarUtil.setDarkMode(this);
 
 
-        //        setContentView(R.layout.activity_start_page);
+        //setContentView(R.layout.activity_start_page);
 
 
         splashPresenter = new SplashPresenter(this);
@@ -84,7 +74,6 @@ public class SplashActivity extends Base2Activity implements SplashControl.ISpla
      * 跳转到主页面
      */
     private void goHome() {
-
         boolean firstOpen = AppUtils.isFirstOpen();
         if (firstOpen) {
             AppUtils.setFirstOpen(false);

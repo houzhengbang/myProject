@@ -1,8 +1,8 @@
 package com.hzb.test.app;
 
 import com.hzb.test.net.ApiService;
-import com.hzb.utils.baseApplication.BaseApplication;
-import com.hzb.utils.net.Utils.RetrofitUtils;
+import com.hzb.myUniversalUtils.baseApplication.BaseApplication;
+import com.hzb.myUniversalUtils.net.Utils.RetrofitUtils;
 
 /**
  * FileName: MyApplication
@@ -23,7 +23,6 @@ public class MyApplication extends BaseApplication {
     //网络请求
     public static ApiService getRetrofitUtils() {
         if (apiService == null) {
-//            apiService = (ApiService) RetrofitUtils.getApiUrl(ApiService.class).getRetrofit(ApiService.class);
             apiService = (ApiService) (new RetrofitUtils()).getApiUrl(ApiService.class);
         }
         return apiService;

@@ -25,8 +25,8 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 
-import com.hzb.utils.utilTool.updateUtils.DownloadDialog;
-import com.hzb.utils.utilTool.updateUtils.SPUtilsBreakpoint;
+import com.hzb.myUniversalUtils.utilTool.updateUtils.DownloadDialog;
+import com.hzb.myUniversalUtils.utilTool.updateUtils.SPUtilsBreakpoint;
 
 import java.io.File;
 import java.io.IOException;

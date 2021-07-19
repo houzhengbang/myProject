@@ -2,8 +2,8 @@ package com.hzb.test.net;
 
 import android.content.Context;
 
-import com.hzb.utils.net.Utils.MyObserver;
-import com.hzb.utils.net.Utils.RxHelper;
+import com.hzb.myUniversalUtils.net.Utils.MyObserver;
+import com.hzb.myUniversalUtils.net.Utils.RxHelper;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

@@ -17,16 +17,14 @@ import androidx.fragment.app.FragmentManager;
 import com.hzb.test.R;
 import com.hzb.test.ui.fragment.MainFragment;
 import com.hzb.test.update.AppDownloadUtils;
-import com.hzb.utils.base.Base2Activity;
+import com.hzb.myUniversalUtils.base.BaseActivity;
 
-public class MainActivity extends Base2Activity {
+public class MainActivity extends BaseActivity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-
         setTitle("main");
 
     }
@@ -128,8 +126,7 @@ public class MainActivity extends Base2Activity {
 
     public void xx(View view) {
 
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             //申请WRITE_EXTERNAL_STORAGE权限
             ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     2);
@@ -152,9 +149,7 @@ public class MainActivity extends Base2Activity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 if (AppDownloadUtils.isHasInstallPermissionWithO(this)) {
                     if (AppDownloadUtils.getInstance(this).getmFile() != null) {
-                        AppDownloadUtils.getInstance(this).installApk(this,
-                                AppDownloadUtils.getInstance(this).getmFile(),
-                                AppDownloadUtils.getInstance(this).getFilePath());
+                        AppDownloadUtils.getInstance(this).installApk(this, AppDownloadUtils.getInstance(this).getmFile(), AppDownloadUtils.getInstance(this).getFilePath());
                     } else {
                         AppDownloadUtils.getInstance(this).setDownUrl(url).start();
                     }

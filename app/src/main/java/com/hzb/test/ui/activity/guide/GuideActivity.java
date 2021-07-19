@@ -15,7 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.hzb.test.R;
 import com.hzb.test.ui.activity.login.LoginActivity;
-import com.hzb.utils.base.Base2Activity;
+import com.hzb.myUniversalUtils.base.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import java.util.List;
  * @description
  * @desc :引导页
  */
-public class GuideActivity extends Base2Activity implements GuideControl.ISplashView, View.OnClickListener {
+public class GuideActivity extends BaseActivity implements GuideControl.ISplashView, View.OnClickListener {
 
 
     private ViewPager mViewPager;

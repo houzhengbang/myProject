@@ -10,8 +10,8 @@ import androidx.annotation.Nullable;
 
 import com.hzb.test.R;
 import com.hzb.test.ui.activity.MainActivity;
-import com.hzb.utils.base.Base2Activity;
-import com.hzb.utils.utilTool.SharedPreferenceUtils;
+import com.hzb.myUniversalUtils.base.BaseActivity;
+import com.hzb.myUniversalUtils.utilTool.SharedPreferenceUtils;
 
 
 /**
@@ -26,12 +26,11 @@ import com.hzb.utils.utilTool.SharedPreferenceUtils;
  * @description
  * @desc :登录页
  */
-public class LoginActivity extends Base2Activity implements LoginControl.ILoginView {
+public class LoginActivity extends BaseActivity implements LoginControl.ILoginView {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         new LoginPresenter(this);
     }
 

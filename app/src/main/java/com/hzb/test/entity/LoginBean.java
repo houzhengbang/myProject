@@ -1,8 +1,7 @@
 package com.hzb.test.entity;
 
-import com.hzb.utils.net.Utils.BaseResponse;
+import com.hzb.myUniversalUtils.net.Utils.BaseResponse;
 
-import java.util.List;
 import java.util.Map;
 
 public class LoginBean extends BaseResponse {
